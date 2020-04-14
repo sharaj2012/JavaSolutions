@@ -58,8 +58,6 @@ public class GenerateRandomPassword {
 
 		System.out.println(randomPassword);
 
-
-
 	}
 
 }

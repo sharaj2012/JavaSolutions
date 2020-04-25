@@ -1,0 +1,4 @@
+com\aem\workflowstep\impl\HelloServiceImpl.class
+com\aem\workflowstep\impl\filters\LoggingFilter.class
+com\aem\workflowstep\package-info.class
+com\aem\workflowstep\HelloService.class

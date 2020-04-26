@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><components xmlns:scr="http://www.osgi.org/xmlns/scr/v1.0.0">
+    <scr:component enabled="true" name="com.myproject.tool.TimeStampFolderCreator">
+        <implementation class="com.myproject.tool.TimeStampFolderCreator"/>
+        <service servicefactory="false">
+            <provide interface="javax.servlet.Servlet"/>
+        </service>
+        <property name="sling.servlet.paths" value="/bin/kpmg/allowedtemplatupdationservlet"/>
+        <property name="sling.servlet.methods" value="GET"/>
+        <property name="service.pid" value="com.myproject.tool.TimeStampFolderCreator"/>
+    </scr:component>
+</components>

@@ -4,7 +4,7 @@
         <service servicefactory="false">
             <provide interface="javax.servlet.Servlet"/>
         </service>
-        <property name="sling.servlet.paths" value="/bin/kpmg/allowedtemplatupdationservlet" private="false"/>
+        <property name="sling.servlet.paths" value="/bin/myproject/timestampfolder" private="false"/>
         <property name="sling.servlet.methods" value="GET" private="false"/>
         <property name="service.pid" value="com.myproject.tool.TimeStampFolderCreator" private="false"/>
     </scr:component>

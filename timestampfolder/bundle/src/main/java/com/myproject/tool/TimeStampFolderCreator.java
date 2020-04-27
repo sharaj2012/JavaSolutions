@@ -22,7 +22,7 @@ import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.api.PageManager;
 
 
-@SlingServlet(paths ="/bin/kpmg/allowedtemplatupdationservlet",
+@SlingServlet(paths ="/bin/myproject/timestampfolder",
 methods = {"GET"},metatype = true)
 public class TimeStampFolderCreator extends SlingAllMethodsServlet {
 
@@ -34,9 +34,10 @@ public class TimeStampFolderCreator extends SlingAllMethodsServlet {
 	private PageManager pageManager ;
 
 	String parentPath=null;
-
+	
 	public void goGet(SlingHttpServletRequest request,SlingHttpServletResponse response)
 	{
+		log.info("i am inside the doGet method");
 
 		resolver = request.getResourceResolver() ; 
 		session = resolver.adaptTo(Session.class); 
@@ -45,6 +46,8 @@ public class TimeStampFolderCreator extends SlingAllMethodsServlet {
 		parentPath = request.getParameter("contentPath");
 		Node fileNode=null;
 		Page newsPage = pageManager.getPage(parentPath);
+		
+		log.info("parentPath::"+parentPath+"root path::"+rootPath);
 		
 /*	    for( ch = 'a' ; ch <= 'z' ; ch++ ){
 
@@ -57,11 +60,14 @@ public class TimeStampFolderCreator extends SlingAllMethodsServlet {
 		Iterator<Page> newsChildPageItr = newsPage.listChildren();
 		while(newsChildPageItr.hasNext()) 
 		{
+			log.info("inside while loop");
 			try { 
 				Page newsChildPage =newsChildPageItr.next();
 				String createdDate = "2020-04-24T10:16:10.334+05:30" ;
-			//	ValueMap pageProperties =newsChildPage.getProperties();
-			//	createdDate= pageProperties.get("jcr:created","");
+				ValueMap pageProperties =newsChildPage.getProperties();
+				createdDate= pageProperties.get("jcr:created","");
+				
+				log.info("date::"+createdDate);
 				
 			String Date = createdDate.substring(0, 10);
 			String[] values = Date.split("-");
@@ -69,7 +75,11 @@ public class TimeStampFolderCreator extends SlingAllMethodsServlet {
 			String month = values[1] ;
 			String day = values[0] ;
 			
+			log.info(year+"::"+month+"::"+day);
+			
             if(!session.nodeExists("/content/dam/news/"+year)){
+            	
+            	log.info("inside folder creation if");
             	
             	Node yearNode = resolver.getResource("/content/dam/news/").adaptTo(Node.class);
     	        fileNode = yearNode.addNode(year,"sling:OrderedFolder");
